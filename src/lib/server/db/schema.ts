@@ -1,7 +1,13 @@
-import { mysqlTable, serial, int, text } from 'drizzle-orm/mysql-core';
+import { mysqlTable, serial, int, datetime, text } from "drizzle-orm/mysql-core";
 
-export const task = mysqlTable('task', {
+export const task = mysqlTable('experiments_tasks', {
 	id: serial('id').primaryKey(),
 	title: text('title').notNull(),
-	priority: int('priority').notNull().default(1)
+	updated_at: datetime('updated_at'),
+});
+
+export const taskDetails = mysqlTable('experiments_details', {
+	id: serial('id').primaryKey(),
+	task_id: int('task_id').notNull(),
+	text: text('text').notNull(),
 });
