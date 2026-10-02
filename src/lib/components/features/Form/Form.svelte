@@ -1,27 +1,37 @@
 <script lang="ts">
-	import { untrack } from "svelte";
-	import { defaultTask } from "#lib/_global/lib/defaultValues.ts";
-	import type { TaskData } from "#lib/server/db/types.ts";
+	import { createTaskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
+	import { defaultCreateValues, create } from "./_models/usePage";
+	import { refreshAll } from "$app/navigation";
+	import type { CreateTaskSchema } from "#lib/_global/lib/validate.ts";
 
-	const newData = $state<TaskData>(structuredClone({ ...defaultTask }));
+	let newData = $state<CreateTaskSchema>(defaultCreateValues);
 
-	const handleCreate = (e: Event) => {
+	const isSubmitDisabled = $derived.by(() => {
+		const result = validateSafeParse(createTaskSchema, newData);
+
+		return !(!!result.success);
+	});
+
+	const handleCreate = async (e: Event) => {
 		e.preventDefault();
-		const input = untrack(() => newData);
 
+		await create(newData);
+
+		newData = defaultCreateValues;
+		await refreshAll();
 	};
 </script>
 <div>
 	<h1>Input</h1>
 	<form onsubmit={ handleCreate }>
 		<fieldset>
-			<input type="text" bind:value={ newData.title } placeholder="title..." />
+			<input type="text" name="title" bind:value={ newData.title } placeholder="title..." />
 		</fieldset>
 		<fieldset>
-			<input type="text" bind:value={ newData.text } placeholder="text..." />
+			<input type="text" name="text" bind:value={ newData.text } placeholder="text..." />
 		</fieldset>
 		<fieldset>
-			<button>Add</button>
+			<button disabled={ isSubmitDisabled }>Add</button>
 		</fieldset>
 	</form>
 </div>

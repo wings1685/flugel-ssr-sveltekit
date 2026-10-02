@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Form, Find, List } from "#lib/components/features/index.ts";
-	import type { PageProps } from "#lib/server/db/types.ts";
+	import type { PageProps } from "#lib/_global/lib/types.ts";
 
 	const { data }: PageProps = $props();
 </script>
