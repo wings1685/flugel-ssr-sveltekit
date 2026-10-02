@@ -1,12 +1,12 @@
-import { fail } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { createTask } from "#lib/server/db/tasks/createTask.ts";
 import { createTaskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
-import type { PageServerLoad } from "../../../$types";
+import type { RequestHandler } from "@sveltejs/kit";
 
-export const POST: PageServerLoad = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.json();
 	const result = validateSafeParse(createTaskSchema, data);
-	if (!result.success) return fail(400, { message: 'Missing fields' });
+	if (!result.success) return error(400, { message: 'Missing fields' });
 
 	await createTask(result.output);
 

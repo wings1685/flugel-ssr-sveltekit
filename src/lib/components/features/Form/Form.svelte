@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { createTaskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
-	import { defaultCreateValues, create } from "./_models/usePage";
+	import { defaultCreateTaskValues } from "#lib/_global/lib/validate.ts";
 	import { refreshAll } from "$app/navigation";
 	import type { CreateTaskSchema } from "#lib/_global/lib/validate.ts";
+	import { apiCreate } from "#lib/_global/lib/api.ts";
 
+	const defaultCreateValues = structuredClone({ ...defaultCreateTaskValues });
 	let newData = $state<CreateTaskSchema>(defaultCreateValues);
 
 	const isSubmitDisabled = $derived.by(() => {
@@ -15,7 +17,7 @@
 	const handleCreate = async (e: Event) => {
 		e.preventDefault();
 
-		await create(newData);
+		await apiCreate('/tasks/create', newData);
 
 		newData = defaultCreateValues;
 		await refreshAll();

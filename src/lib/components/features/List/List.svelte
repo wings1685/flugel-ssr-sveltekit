@@ -1,39 +1,41 @@
 <script lang="ts">
+	import { apiDelete, apiUpdate } from "#lib/_global/lib/api.ts";
+	import { refreshAll } from "$app/navigation";
 	import type { TaskItem } from "#lib/server/db/types.ts";
-	import { untrack } from "svelte";
 
 	type Props = {
 		data: TaskItem[];
 	};
 	const { data }: Props = $props();
-	let tasks = $state<TaskItem[]>();
+	let tasks = $state<TaskItem[]>([]);
 
 	$effect(() => {
-		tasks = data;
+		tasks = structuredClone([ ...data ]);
 	});
 
-	const handleEdit = (e: Event, id: TaskItem['id']) => {
-		e.preventDefault();
-		const input = data.find(d => d.id === id);
-		if (!input) return;
+	const handleEdit = async (id: TaskItem['id']) => {
+		const targetData = $state.snapshot(tasks.find(d => d.id === id));
+		if (!targetData) throw new Error('Task Not Found.');
+
+		const { title, text } = targetData;
+		const input = { title, text };
+		await apiUpdate(`/tasks/update/${id}`, input);
+		await refreshAll();
 	};
-	const handleDelete = (e: Event, id: TaskItem['id']) => {
-		e.preventDefault();
-		return
+	const handleDelete = async (id: TaskItem['id']) => {
+		await apiDelete(`/tasks/delete/${id}`);
+		await refreshAll();
 	};
-	$effect(() => {
-		console.log(data);
-	});
 </script>
 <div>
 	<h1>List</h1>
 	<ul>
-{#each tasks as task, index}
+{#each tasks as task, index (task.id)}
 		<li>
-			<input type="text" bind:value={ task.title } />
-			<input type="text" bind:value={ task.text } />
-			<button type="button" onclick={ e => handleEdit(e, task.id) }>Edit</button>
-			<button type="button" onclick={ e => handleDelete(e, task.id) }>Delete</button>
+			<input type="text" bind:value={ tasks[index].title } />
+			<input type="text" bind:value={ tasks[index].text } />
+			<button type="button" onclick={ () => handleEdit(task.id) }>Edit</button>
+			<button type="button" onclick={ () => handleDelete(task.id) }>Delete</button>
 		</li>
 {:else}
 		<li>Task Not Found.</li>
