@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { TaskData } from "#lib/server/db/types.ts";
-	import { Form, Find, List } from "../features";
+	import { Form, Find, List } from "#lib/components/features/index.ts";
+	import type { PageProps } from "#lib/server/db/types.ts";
 
-	let data = $state<TaskData[]>([]);
+	const { data }: PageProps = $props();
 </script>
 <main>
-	<Form bind:data={ data } />
+	<Form />
 	<Find />
-	<List data={ data } />
+	<List data={ data.tasks } />
 </main>

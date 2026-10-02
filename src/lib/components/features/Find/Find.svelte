@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import { defailtFindData } from "#lib/_global/lib/defaultValues.ts";
 
-	const findData = $state({
-		title: '',
-		sort: 'desc',
-	});
+	const findData = $state(defailtFindData);
 	const handleFind = (e: Event) => {
 		e.preventDefault();
 		goto(`/?title=${findData.title}&sort=${findData.sort}`);

@@ -3,18 +3,12 @@
 	import { defaultTask } from "#lib/_global/lib/defaultValues.ts";
 	import type { TaskData } from "#lib/server/db/types.ts";
 
-	type Props = {
-		data: TaskData[];
-	};
-	let { data = $bindable() }: Props = $props();
-
 	const newData = $state<TaskData>(structuredClone({ ...defaultTask }));
 
 	const handleCreate = (e: Event) => {
 		e.preventDefault();
 		const input = untrack(() => newData);
 
-		data.push(input);
 	};
 </script>
 <div>
