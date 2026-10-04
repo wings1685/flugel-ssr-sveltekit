@@ -7,6 +7,7 @@
 		data: TaskItem[];
 	};
 	const { data }: Props = $props();
+
 	let tasks = $state<TaskItem[]>([]);
 
 	$effect(() => {
@@ -22,6 +23,7 @@
 		await apiUpdate(`/tasks/update/${id}`, input);
 		await refreshAll();
 	};
+
 	const handleDelete = async (id: TaskItem['id']) => {
 		await apiDelete(`/tasks/delete/${id}`);
 		await refreshAll();
