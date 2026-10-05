@@ -2,11 +2,12 @@
 	import { apiDelete, apiUpdate } from "#lib/_global/lib/api.ts";
 	import { refreshAll } from "$app/navigation";
 	import type { TaskItem } from "#lib/server/db/types.ts";
+	import type { DeepGuard } from "#lib/_global/lib/types.ts";
 
 	type Props = {
 		data: TaskItem[];
 	};
-	const { data }: Props = $props();
+	const { data }: DeepGuard<Props> = $props();
 
 	let tasks = $state<TaskItem[]>([]);
 

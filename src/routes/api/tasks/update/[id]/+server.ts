@@ -10,7 +10,7 @@ export const PUT: RequestHandler = async ({ request, params }) => {
 		id: +(params.id ?? ''),
 	};
 	const result = validateSafeParse(updateTaskSchema, input);
-	if (!result.success) return error(400, { message: 'Missing fields' });
+	if (!result.success) throw error(400, 'Missing fields');
 
 	await updateTask(result.output);
 

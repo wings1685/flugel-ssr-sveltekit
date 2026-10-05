@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Form, Find, List } from "#lib/components/features/index.ts";
-	import type { PageProps } from "#lib/_global/lib/types.ts";
+	import type { DeepGuard, PageProps } from "#lib/_global/lib/types.ts";
 
-	const { data }: PageProps = $props();
+	const { data }: DeepGuard<PageProps> = $props();
 </script>
 <main>
 	<Form />

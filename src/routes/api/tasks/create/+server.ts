@@ -6,7 +6,7 @@ import type { RequestHandler } from "@sveltejs/kit";
 export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.json();
 	const result = validateSafeParse(createTaskSchema, data);
-	if (!result.success) return error(400, { message: 'Missing fields' });
+	if (!result.success) throw error(400, 'Missing fields');
 
 	await createTask(result.output);
 

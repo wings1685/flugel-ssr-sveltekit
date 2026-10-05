@@ -4,9 +4,7 @@ import { deleteTaskSchema, validateSafeParse } from "#lib/_global/lib/validate.t
 import type { RequestHandler } from "@sveltejs/kit";
 
 export const DELETE: RequestHandler = async ({ params }) => {
-	const input = {
-		id: +(params.id ?? ''),
-	};
+	const input = { id: +(params.id ?? '') };
 	const result = validateSafeParse(deleteTaskSchema, input);
 	if (!result.success) throw error(400, 'Missing fields');
 
