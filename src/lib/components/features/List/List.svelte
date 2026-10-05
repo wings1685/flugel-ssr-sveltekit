@@ -39,8 +39,6 @@
 			<button type="button" onclick={ () => handleEdit(task.id) }>Edit</button>
 			<button type="button" onclick={ () => handleDelete(task.id) }>Delete</button>
 		</li>
-{:else}
-		<li>Task Not Found.</li>
 {/each}
 	</ul>
 </div>
