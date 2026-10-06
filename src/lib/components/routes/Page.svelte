@@ -4,11 +4,13 @@
 
 	type ListProps = ComponentProps<typeof List>;
 	type FindProps = ComponentProps<typeof Find>;
-	type Props = ListProps & FindProps;
+	type Props = ListProps & {
+		findQuery: FindProps;
+	};
 	const { tasks, findQuery }: Props = $props();
 </script>
 <main>
 	<Form />
-	<Find { findQuery } />
+	<Find { ...findQuery } />
 	<List { tasks } />
 </main>
