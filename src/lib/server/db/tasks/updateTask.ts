@@ -3,9 +3,8 @@ import { db } from "../index.ts";
 import { task, taskDetail } from "../schema.ts";
 import type { TaskDetail } from "../types.ts";
 import type { UpdateTaskSchema } from "#lib/_global/lib/validate.ts";
-import type { DeepGuard } from "#lib/_global/lib/types.ts";
 
-export const updateTask = async (values: DeepGuard<UpdateTaskSchema>) => {
+export const updateTask = async (values: UpdateTaskSchema) => {
 	const { id, title, text } = values;
 
 	const taskData: Pick<UpdateTaskSchema, 'title'> = { title };

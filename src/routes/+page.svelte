@@ -1,7 +1,11 @@
 <script lang="ts">
 	import Page from "#lib/components/routes/Page.svelte";
-	import type { DeepGuard, PageProps } from "#lib/_global/lib/types.ts";
+	import type { ComponentProps } from "svelte";
 
-	const { data }: DeepGuard<PageProps> = $props();
+	type PageProps = ComponentProps<typeof Page>;
+	type Props = {
+		data: PageProps;
+	};
+	const { data }: Props = $props();
 </script>
-<Page data={ data } />
+<Page { ...data } />

@@ -6,5 +6,5 @@ export const load: PageServerLoad = async ({ url }) => {
 	const findQuery = buildFindQuery(url);
 	const tasks = await apiFetch('/tasks', findQuery);
 
-	return { tasks };
+	return { tasks, findQuery };
 };

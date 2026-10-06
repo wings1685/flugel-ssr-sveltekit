@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { Form, Find, List } from "#lib/components/features/index.ts";
-	import type { DeepGuard, PageProps } from "#lib/_global/lib/types.ts";
+	import type { ComponentProps } from "svelte";
 
-	const { data }: DeepGuard<PageProps> = $props();
+	type ListProps = ComponentProps<typeof List>;
+	type FindProps = ComponentProps<typeof Find>;
+	type Props = ListProps & FindProps;
+	const { tasks, findQuery }: Props = $props();
 </script>
 <main>
 	<Form />
-	<Find />
-	<List data={ data.tasks } />
+	<Find { findQuery } />
+	<List { tasks } />
 </main>
