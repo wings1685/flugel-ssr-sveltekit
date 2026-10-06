@@ -1,10 +1,14 @@
 import { db } from "../index.ts";
 import { task, taskDetail } from "../schema.ts";
+import { createTaskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
 import type { CreateTaskSchema } from "#lib/_global/lib/validate.ts";
 import type { TaskDetail } from "../types.ts";
 
 export const createTask = async (values: CreateTaskSchema) => {
-	const { title, text } = values;
+	const result = validateSafeParse(createTaskSchema, values);
+	if (!result.success) throw new Error('Missing fields');
+
+	const { title, text } = result.output;
 
 	const taskData: Pick<CreateTaskSchema, 'title'> = { title };
 

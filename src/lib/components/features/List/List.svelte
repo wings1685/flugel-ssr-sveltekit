@@ -1,30 +1,27 @@
 <script lang="ts">
 	import { apiDelete, apiUpdate } from "#lib/_global/lib/api.ts";
 	import { refreshAll } from "$app/navigation";
-	import type { TaskItem } from "#lib/server/db/types.ts";
+	import type { TaskSchema } from "#lib/_global/lib/validate.ts";
 
 	type Props = {
-		tasks: TaskItem[];
+		tasks: TaskSchema[];
 	};
 	const { tasks }: Props = $props();
 
-	let editableTasks = $state<TaskItem[]>([]);
+	let editableTasks = $state<TaskSchema[]>([]);
 
 	$effect(() => {
 		editableTasks = structuredClone([ ...tasks ]);
 	});
 
-	const handleEdit = async (id: TaskItem['id']) => {
+	const handleEdit = async (id: TaskSchema['id']) => {
 		const targetData = $state.snapshot(editableTasks.find(d => d.id === id));
-		if (!targetData) throw new Error('Task Not Found.');
 
-		const { title, text } = targetData;
-		const input = { title, text };
-		await apiUpdate(`/tasks/update/${id}`, input);
+		await apiUpdate(`/tasks/update/${id}`, targetData);
 		await refreshAll();
 	};
 
-	const handleDelete = async (id: TaskItem['id']) => {
+	const handleDelete = async (id: TaskSchema['id']) => {
 		await apiDelete(`/tasks/delete/${id}`);
 		await refreshAll();
 	};

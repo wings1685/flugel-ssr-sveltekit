@@ -1,10 +1,15 @@
 import { eq } from "drizzle-orm";
 import { db } from "../index.ts";
+import { deleteTaskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
 import { task, taskDetail } from "../schema.ts";
 import type { DeleteTaskSchema } from "#lib/_global/lib/validate.ts";
 
 export const deleteTask = async (values: DeleteTaskSchema) => {
-	const { id } = values;
+	const input = { id: +(values.id ?? '') };
+	const result = validateSafeParse(deleteTaskSchema, input);
+	if (!result.success) throw new Error('Missing fields');
+
+	const { id } = result.output;
 
 	await db.transaction(async (tx) => {
 		await tx.delete(task).where(eq(task.id, id));

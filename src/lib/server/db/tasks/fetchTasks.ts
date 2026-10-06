@@ -4,8 +4,8 @@ import { task, taskDetail } from "../schema.ts";
 import { defaultFindValues, findSchema, validateParse } from "#lib/_global/lib/validate.ts";
 import type { FindSchema } from "#lib/_global/lib/validate.ts";
 
-export const buildFindQuery = (url: URL) => {
-	const params = url.searchParams;
+export const buildFindQuery = (search: string) => {
+	const params = new URLSearchParams(search);
 	const findQuery = {
 		title: params.get('title') ?? defaultFindValues.title,
 		sort: params.get('sort') ?? defaultFindValues.sort,
@@ -21,7 +21,6 @@ export const fetchTasks = async (findQuery: FindSchema) => {
 		.select({
 			id: task.id,
 			title: task.title,
-			updated_at: task.updated_at,
 			text: taskDetail.text,
 		})
 		.from(task)

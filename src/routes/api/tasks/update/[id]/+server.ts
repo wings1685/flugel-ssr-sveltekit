@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 import { updateTask } from "#lib/server/db/tasks/updateTask.ts";
-import { updateTaskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
+import { taskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
 import type { RequestHandler } from "@sveltejs/kit";
 
 export const PUT: RequestHandler = async ({ request, params }) => {
@@ -9,7 +9,7 @@ export const PUT: RequestHandler = async ({ request, params }) => {
 		...data,
 		id: +(params.id ?? ''),
 	};
-	const result = validateSafeParse(updateTaskSchema, input);
+	const result = validateSafeParse(taskSchema, input);
 	if (!result.success) throw error(400, 'Missing fields');
 
 	await updateTask(result.output);
