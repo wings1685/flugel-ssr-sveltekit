@@ -2,8 +2,8 @@ import { eq } from "drizzle-orm";
 import { db } from "../index.ts";
 import { taskSchema, validateSafeParse } from "#lib/_global/lib/validate.ts";
 import { task, taskDetail } from "../schema.ts";
-import type { TaskDetail } from "../types.ts";
 import type { TaskSchema } from "#lib/_global/lib/validate.ts";
+import type { TaskDrizzleSchema, TaskDetailDrizzleSchema } from "../types.ts";
 
 export const updateTask = async (values?: TaskSchema) => {
 	if (!values) throw new Error('Task Not Found.');
@@ -16,7 +16,7 @@ export const updateTask = async (values?: TaskSchema) => {
 	if (!result.success) throw new Error('Missing fields');
 
 	const { id, title, text } = result.output;
-	const taskData: Pick<TaskSchema, 'title'> = { title };
+	const taskData: Pick<TaskDrizzleSchema, 'title'> = { title };
 
 	await db.transaction(async (tx) => {
 		await tx.update(task).set(taskData).where(eq(task.id, id));
@@ -26,7 +26,7 @@ export const updateTask = async (values?: TaskSchema) => {
 		});
 		if (!detail) throw new Error('TaskDetail Not Found.');
 
-		const taskDetailData: Omit<TaskDetail, 'id'> = {
+		const taskDetailData: Omit<TaskDetailDrizzleSchema, 'id'> = {
 			task_id: id,
 			text: text,
 		};
