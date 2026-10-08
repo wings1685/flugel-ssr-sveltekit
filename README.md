@@ -8,7 +8,7 @@ SvelteKit SSR での挙動を見るためだけの実験場です。
 
 - SvelteKit 3.0.0
 
-- Drizzle-Orm 0.45.3
+- Drizzle ORM 0.45.3
 - Drizzle Kit 0.31.11
 
 ## Experiments
