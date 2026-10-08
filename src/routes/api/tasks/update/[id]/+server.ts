@@ -6,5 +6,5 @@ export const PUT: RequestHandler = async ({ request, params }) => {
 	data.id = +(params.id ?? '');
 	await updateTask(data);
 
-	return Response.json({}, { status: 201 });
+	return new Response(null, { status: 204 });
 };

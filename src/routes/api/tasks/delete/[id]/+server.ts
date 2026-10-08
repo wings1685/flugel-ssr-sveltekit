@@ -5,5 +5,5 @@ export const DELETE: RequestHandler = async ({ params }) => {
 	const data = { id: +(params.id ?? '') };
 	await deleteTask(data);
 
-	return Response.json({}, { status: 201 });
+	return new Response(null, { status: 204 });
 };

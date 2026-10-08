@@ -1,56 +1,22 @@
-# sv
+# SSR Experiments SvelteKit Version
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+SvelteKit SSR での挙動を見るためだけの実験場です。
 
-## Creating a project
+**Note:** 本リポジトリは、実験場という性質であるため Issues 及び Pull Requests は受け付けておりません。
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Tech Stack
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- SvelteKit 3.0.0
 
-To recreate this project with the same configuration:
+- Drizzle-Orm 0.45.3
+- Drizzle Kit 0.31.11
 
-```sh
-# recreate this project
-npx sv@1.0.1 create --template minimal --types ts --add prettier eslint sveltekit-adapter="adapter:auto" --install npm ./
-```
+## Experiments
 
-## Adding features
+この実験場では以下を行いました。
 
-Add features to your project with `sv add`:
+- SvelteKit + Drizzle での CRUD 処理
 
-```sh
-npx sv add
-```
+## Related Articles
 
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- [各 JS フレームワークのみでの DB 連携探訪記](https://wings.hatenablog.com/entry/withoutLaravelFestival)
