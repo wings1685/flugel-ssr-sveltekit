@@ -1,19 +1,16 @@
 import { eq, like, asc, desc } from "drizzle-orm";
 import { db } from "../index.ts";
 import { task, taskDetail } from "../schema.ts";
-import { defaultFindValues, findSchema, validateParse } from "#lib/_global/lib/validate.ts";
+import { defaultFindValues } from "#lib/_global/lib/validate.ts";
 import type { FindSchema } from "#lib/_global/lib/validate.ts";
 
 export const buildFindQuery = (search: string) => {
 	const params = new URLSearchParams(search);
-	const findQuery = {
+
+	return {
 		title: params.get('title') ?? defaultFindValues.title,
 		sort: params.get('sort') ?? defaultFindValues.sort,
 	} as FindSchema;
-
-	validateParse(findSchema, findQuery);
-
-	return findQuery;
 };
 
 export const fetchTasks = async (findQuery: FindSchema) => {
@@ -21,6 +18,7 @@ export const fetchTasks = async (findQuery: FindSchema) => {
 		.select({
 			id: task.id,
 			title: task.title,
+			updated_at: task.updated_at,
 			text: taskDetail.text,
 		})
 		.from(task)
