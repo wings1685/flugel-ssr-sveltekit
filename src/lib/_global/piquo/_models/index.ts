@@ -1,5 +1,5 @@
 import { _piquoRunes } from "./runes.svelte";
-import { _piquoNano } from "./nano.svelte";
+import { _piquoNano } from "./nano";
 
 export const allStores = {
 	piquoRunes: _piquoRunes,
