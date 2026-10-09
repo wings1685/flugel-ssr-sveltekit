@@ -24,7 +24,7 @@
 <div>
 	<h1>Raw Store</h1>
 	<fieldset>
-		<span>forServer: { rawRunesServer.forServer }</span>
+		<span>forServer: { rawRunesServer }</span>
 		<button onclick={ () => handleServerStore('raw') }>Click</button>
 	</fieldset>
 	<fieldset>
@@ -33,7 +33,7 @@
 	</fieldset>
 	<h1>Piquo Store</h1>
 	<fieldset>
-		<span>forServer: { piquoRunesServer.forServer }</span>
+		<span>forServer: { piquoRunesServer }</span>
 		<button onclick={ () => handleServerStore('piquo') }>Click</button>
 	</fieldset>
 	<fieldset>

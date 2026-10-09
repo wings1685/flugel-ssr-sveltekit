@@ -8,7 +8,7 @@ export const load: PageServerLoad = async () => {
 	const { piquoNano } = piquoStore('piquoNano');
 
 	return {
-		rawRunesServer: rawRunes, piquoRunesServer: piquoRunes(),
+		rawRunesServer: rawRunes.forServer, piquoRunesServer: piquoRunes().forServer,
 		rawNanoServer: rawNano.get().forServer, piquoNanoServer: piquoNano.get().forServer,
 	};
 };
