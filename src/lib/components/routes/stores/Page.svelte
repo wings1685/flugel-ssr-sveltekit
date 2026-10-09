@@ -13,8 +13,8 @@
 
 	const { piquoRunes, setPiquoRunes } = piquoStore('piquoRunes');
 	const { piquoNano, setPiquoNano } = piquoStore('piquoNano');
-	const nano = useStore(rawNano);
-	const nanoPiquo = useStore(piquoNano);
+	const rawNanoClient = useStore(rawNano);
+	const piquoNanoPiquo = useStore(piquoNano);
 
 	const handleServerStore = async (key: StoreName) => {
 		await apiUpdate('/stores', { key: key });
@@ -45,7 +45,7 @@
 		<button onclick={ () => handleServerStore('rawNano') }>Click</button>
 	</fieldset>
 	<fieldset>
-		<span>forClient: { nano.current.forClient }</span>
+		<span>forClient: { rawNanoClient.current.forClient }</span>
 		<button onclick={ () => setRawNano('forClient') }>Click</button>
 	</fieldset>
 	<h1>Piquo Nano Store</h1>
@@ -54,7 +54,7 @@
 		<button onclick={ () => handleServerStore('piquoNano') }>Click</button>
 	</fieldset>
 	<fieldset>
-		<span>forClient: { nanoPiquo.current.forClient }</span>
+		<span>forClient: { piquoNanoPiquo.current.forClient }</span>
 		<button onclick={ () => setPiquoNano('forClient') }>Click</button>
 	</fieldset>
 </div>
