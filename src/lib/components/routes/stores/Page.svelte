@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { rawRunes } from "#lib/_global/stores/raw.svelte.ts";
+	import { rawRunes, setRawRunes } from "#lib/_global/stores/raw.svelte.ts";
 	import { apiUpdate } from "#lib/_global/lib/api.ts";
-	import { setRawRunes } from "#lib/_global/stores/raw.svelte.ts";
 	import { piquoStore } from "#lib/_global/piquo/index.ts";
 	import { rawNano, setRawNano } from "#lib/_global/stores/nano.ts";
 	import { useStore } from "@nanostores/svelte-runes";
