@@ -9,8 +9,6 @@
 	};
 	const { tasks, findQuery }: Props = $props();
 </script>
-<main>
-	<Form />
-	<Find { ...findQuery } />
-	<List { tasks } />
-</main>
+<Form />
+<Find { ...findQuery } />
+<List { tasks } />
