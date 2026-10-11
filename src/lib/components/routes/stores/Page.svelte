@@ -21,7 +21,7 @@
 	};
 </script>
 <div>
-	<h1>Raw Store</h1>
+	<h1>Raw Runes</h1>
 	<fieldset>
 		<span>forServer: { rawRunesServer }</span>
 		<button onclick={ () => handleServerStore('raw') }>Click</button>
@@ -30,7 +30,7 @@
 		<span>forClient: { rawRunes.forClient }</span>
 		<button onclick={ () => setRawRunes('forClient') }>Click</button>
 	</fieldset>
-	<h1>Piquo Store</h1>
+	<h1>Piquo Runes</h1>
 	<fieldset>
 		<span>forServer: { piquoRunesServer }</span>
 		<button onclick={ () => handleServerStore('piquo') }>Click</button>
@@ -48,7 +48,7 @@
 		<span>forClient: { rawNanoClient.current.forClient }</span>
 		<button onclick={ () => setRawNano('forClient') }>Click</button>
 	</fieldset>
-	<h1>Piquo Nano Store</h1>
+	<h1>Piquo Nano Stores</h1>
 	<fieldset>
 		<span>forServer: { piquoNanoServer }</span>
 		<button onclick={ () => handleServerStore('piquoNano') }>Click</button>
