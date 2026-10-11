@@ -14,7 +14,7 @@
 	const { piquoRunes, setPiquoRunes } = piquoStore('piquoRunes');
 	const { piquoNano, setPiquoNano } = piquoStore('piquoNano');
 	const rawNanoClient = useStore(rawNano);
-	const piquoNanoClient = useStore(piquoNano);
+	const piquoNanoClient = useStore(piquoNano());
 
 	const handleServerStore = async (key: StoreName) => {
 		await apiUpdate('/stores', { key: key });

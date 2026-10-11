@@ -9,6 +9,6 @@ export const load: PageServerLoad = async () => {
 
 	return {
 		rawRunesServer: rawRunes.forServer, piquoRunesServer: piquoRunes().forServer,
-		rawNanoServer: rawNano.get().forServer, piquoNanoServer: piquoNano.get().forServer,
+		rawNanoServer: rawNano.get().forServer, piquoNanoServer: piquoNano().get().forServer,
 	};
 };

@@ -29,3 +29,4 @@ export const defineStoreValues = <T extends string>(name: T) => ({
 	initial: (): ExperimentStore<T> => getInitialValues(name),
 	changed: (): ChangedValue<T> => getChangedText(name),
 });
+export type InitialValues = ReturnType<typeof getInitialValues>;
