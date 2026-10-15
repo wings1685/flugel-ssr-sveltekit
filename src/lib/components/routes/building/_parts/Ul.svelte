@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { onMount, untrack } from "svelte";
 	import { buildingData, buildPerformance } from "../_models/performance";
+	import type { LiPatternsProps } from "../_models/performance";
 
-	type Props = {
-		number: 10 | 1000 | 100000;
-	};
-	const { number }: Props = $props();
+	const { number }: LiPatternsProps = $props();
 
 	const data = buildingData(untrack(() => number));
 
